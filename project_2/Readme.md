@@ -25,4 +25,3 @@ A production-ready **Machine Learning** web application that classifies Iris flo
 - **Frontend**: HTML5, CSS3 (Jinja2 templating)
 - **Data Handling**: Pandas, NumPy
 
-## 📁 Project Structure
