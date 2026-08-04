@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DecodeLabs · Iris AI</title>
+
+    <!-- Google Fonts (Modern Typography) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(145deg, #f6f9fc 0%, #e9f1f8 100%);
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* ---------- MAIN CARD (Glassmorphism) ---------- */
+        .card {
+            max-width: 720px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 2.5rem 3rem;
+            box-shadow: 0 30px 60px -20px rgba(0, 20, 40, 0.25),
+                        0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 40px 80px -20px rgba(18, 52, 106, 0.3);
+        }
+
+        /* ---------- HEADER ---------- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            padding-bottom: 1.25rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+        }
+
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #0f172a;
+            line-height: 1.2;
+        }
+
+        .logo-text h1 span {
+            color: #3b82f6;
+        }
+
+        .logo-text .badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 2px 10px;
+            border-radius: 30px;
+        }
+
+        .header-emoji {
+            font-size: 2rem;
+            opacity: 0.6;
+        }
+
+        /* ---------- FORM INPUTS ---------- */
+        .form-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.8rem 0 2rem 0;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1e293b;
+            letter-spacing: -0.01em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .input-group label .unit {
+            font-weight: 400;
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+
+        /* Custom Range Slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            outline: none;
+            transition: background 0.2s;
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #1e293b;
+            box-shadow: 0 4px 10px rgba(30, 41, 59, 0.2);
+            border: 3px solid white;
+            transition: 0.15s ease;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.12);
+            background: #0f172a;
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #1e293b;
+            border: 3px solid white;
+            cursor: pointer;
+        }
+
+        .slider-value {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0f172a;
+            background: #f8fafc;
+            padding: 0px 12px;
+            border-radius: 30px;
+            min-width: 48px;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+            border: 1px solid #e2e8f0;
+            line-height: 28px;
+        }
+
+        .input-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2px;
+        }
+
+        /* ---------- PREDICT BUTTON ---------- */
+        .btn-predict {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            letter-spacing: -0.01em;
+            margin-top: 0.5rem;
+        }
+
+        .btn-predict i {
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-predict:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(15, 23, 42, 0.25);
+            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+        }
+
+        .btn-predict:hover i {
+            transform: translateX(4px);
+        }
+
+        .btn-predict:active {
+            transform: scale(0.97);
+        }
+
+        /* ---------- RESULT SECTION (Dynamic) ---------- */
+        .result-box {
+            margin-top: 2.2rem;
+            padding: 1.8rem 2rem;
+            background: #f8fafc;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            transition: all 0.4s ease;
+            display: block;
+        }
+
+        .result-box .prediction-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .result-box .prediction-header h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #64748b;
+        }
+
+        .result-box .prediction-species {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .result-box .prediction-species .species-icon {
+            font-size: 2rem;
+        }
+
+        .result-box .prediction-species .species-name {
+            background: linear-gradient(135deg, #1e293b, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Confidence Bars */
+        .confidence-list {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .confidence-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .confidence-item .label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #334155;
+            width: 90px;
+            flex-shrink: 0;
+        }
+
+        .confidence-item .bar-track {
+            flex: 1;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .confidence-item .bar-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 40px;
+            background: linear-gradient(90deg, #3b82f6, #2563eb);
+            transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .confidence-item .bar-fill.high {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+        }
+
+        .confidence-item .bar-fill.medium {
+            background: linear-gradient(90deg, #eab308, #ca8a04);
+        }
+
+        .confidence-item .bar-fill.low {
+            background: linear-gradient(90deg, #f43f5e, #e11d48);
+        }
+
+        .confidence-item .percent {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0f172a;
+            width: 55px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* ---------- PLACEHOLDER STATE ---------- */
+        .placeholder-box {
+            margin-top: 2.2rem;
+            padding: 2rem;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 24px;
+            border: 2px dashed #e2e8f0;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .placeholder-box i {
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 8px;
+            opacity: 0.5;
+        }
+
+        /* ---------- FOOTER ---------- */
+        .footer {
+            margin-top: 2.2rem;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            border-top: 1px solid rgba(0,0,0,0.03);
+            padding-top: 1.5rem;
+            letter-spacing: 0.01em;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer a {
+            color: #64748b;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer a:hover {
+            color: #0f172a;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 600px) {
+            .card {
+                padding: 1.8rem 1.5rem;
+                border-radius: 28px;
+            }
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            .result-box .prediction-species {
+                font-size: 1.6rem;
+            }
+            .confidence-item .label {
+                width: 70px;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Hide default spin buttons on number input if used, but we use range */
+        .hidden-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo-area">
+            <div class="logo-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="logo-text">
+                <h1><span>Decode</span>Labs</h1>
+                <span class="badge">AI · Project 2</span>
+            </div>
+        </div>
+        <div class="header-emoji">🌿</div>
+    </div>
+
+    <!-- FORM -->
+    <form method="POST" action="/predict" id="predictForm">
+        <div class="form-grid">
+            <!-- Sepal Length -->
+            <div class="input-group">
+                <label>
+                    <span>Sepal Length <span class="unit">(cm)</span></span>
+                    <span class="slider-value" id="val_sepal_length">5.1</span>
+                </label>
+                <input type="range" min="4.0" max="8.0" step="0.1" value="5.1" 
+                       name="sepal_length" id="sepal_length"
+                       oninput="updateDisplay('sepal_length', this.value)" />
+            </div>
+
+            <!-- Sepal Width -->
+            <div class="input-group">
+                <label>
+                    <span>Sepal Width <span class="unit">(cm)</span></span>
+                    <span class="slider-value" id="val_sepal_width">3.5</span>
+                </label>
+                <input type="range" min="2.0" max="4.5" step="0.1" value="3.5" 
+                       name="sepal_width" id="sepal_width"
+                       oninput="updateDisplay('sepal_width', this.value)" />
+            </div>
+
+            <!-- Petal Length -->
+            <div class="input-group">
+                <label>
+                    <span>Petal Length <span class="unit">(cm)</span></span>
+                    <span class="slider-value" id="val_petal_length">1.4</span>
+                </label>
+                <input type="range" min="1.0" max="7.0" step="0.1" value="1.4" 
+                       name="petal_length" id="petal_length"
+                       oninput="updateDisplay('petal_length', this.value)" />
+            </div>
+
+            <!-- Petal Width -->
+            <div class="input-group">
+                <label>
+                    <span>Petal Width <span class="unit">(cm)</span></span>
+                    <span class="slider-value" id="val_petal_width">0.2</span>
+                </label>
+                <input type="range" min="0.1" max="2.5" step="0.1" value="0.2" 
+                       name="petal_width" id="petal_width"
+                       oninput="updateDisplay('petal_width', this.value)" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn-predict">
+            <span>Analyze & Predict</span>
+            <i class="fas fa-arrow-right"></i>
+        </button>
+    </form>
+
+    <!-- RESULT SECTION (Jinja will render this) -->
+    {% if prediction %}
+    <div class="result-box">
+        <div class="prediction-header">
+            <h3><i class="fas fa-chart-pie" style="margin-right: 6px;"></i> Prediction Result</h3>
+            <span style="font-size: 0.8rem; background: #e2e8f0; padding: 2px 12px; border-radius: 30px; color: #475569;">AI Confidence</span>
+        </div>
+
+        <div class="prediction-species">
+            <span class="species-icon">🌸</span>
+            <span class="species-name">{{ prediction }}</span>
+        </div>
+
+        <div class="confidence-list">
+            {% for name, prob in probabilities.items() %}
+            <div class="confidence-item">
+                <span class="label">{{ name }}</span>
+                <div class="bar-track">
+                    <div class="bar-fill 
+                        {% if prob >= 70 %}high
+                        {% elif prob >= 40 %}medium
+                        {% else %}low
+                        {% endif %}" 
+                        style="width: {{ prob }}%;">
+                    </div>
+                </div>
+                <span class="percent">{{ prob }}%</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <!-- PLACEHOLDER (Jab koi prediction na ho) -->
+    <div class="placeholder-box">
+        <i class="fas fa-flask"></i>
+        <span>Adjust the sliders and click <strong>“Analyze & Predict”</strong></span>
+    </div>
+    {% endif %}
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <span><i class="far fa-copyright"></i> 2026 DecodeLabs</span>
+        <span>⚡ Powered by Scikit-Learn</span>
+        <span><i class="fas fa-map-pin"></i> Greater Lucknow, India</span>
+    </div>
+</div>
+
+<!-- ---------- JAVASCRIPT (Real-time Slider Display) ---------- -->
+<script>
+    function updateDisplay(id, value) {
+        // Update the number next to the slider
+        const displaySpan = document.getElementById('val_' + id);
+        if (displaySpan) {
+            displaySpan.textContent = parseFloat(value).toFixed(1);
+        }
+    }
+
+    // On page load, ensure the displayed numbers match the slider positions
+    document.addEventListener('DOMContentLoaded', function() {
+        const sliders = document.querySelectorAll('input[type="range"]');
+        sliders.forEach(slider => {
+            const id = slider.id;
+            const displaySpan = document.getElementById('val_' + id);
+            if (displaySpan) {
+                displaySpan.textContent = parseFloat(slider.value).toFixed(1);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
