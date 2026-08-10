@@ -1,5 +1,5 @@
 # ======================================================================
-# PROJECT 1: NOVA AI - UPGRADED WITH MULTIPLE JOKES & BETTER MATCHING
+# PROJECT 1: Nexus AI - UPGRADED WITH MULTIPLE JOKES & BETTER MATCHING
 # DecodeLabs Internship 2026
 # ======================================================================
 
