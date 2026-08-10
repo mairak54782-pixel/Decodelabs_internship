@@ -1,4 +1,4 @@
-# 🧠 Nova AI – Rule-Based Customer Support Chatbot
+# 🧠 Nexus AI – Rule-Based Customer Support Chatbot
 
 > **DecodeLabs Internship 2026** | Batch 2026 | Project 1
 
