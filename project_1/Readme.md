@@ -1,6 +1,6 @@
 # 🧠 Nexus AI – Rule-Based Customer Support Chatbot
 
-> **DecodeLabs Internship 2026** | Batch 2026 | Project 1
+
 
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28%2B-red.svg)](https://streamlit.io)
@@ -12,8 +12,8 @@ A **production-ready, deterministic AI chatbot** built entirely with Python and 
 
 ## 📸 Live Demo
 
-![Nexus AI Chatbot Screenshot](screenshot1.png)
-![Nexus AI Chatbot Screenshot](screenshot2.png)
+![Nexus AI Chatbot Screenshot](Screenshot1.png)
+![Nexus AI Chatbot Screenshot](Screenshot2.png)
 
 *Experience the modern, corporate-style chat interface with quick replies and instant feedback.*
 
